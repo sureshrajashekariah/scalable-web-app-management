@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schema.management.azure.com/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+      {
+        "type": "Microsoft.Insights/alertRules",
+        "apiVersion": "2021-05-01",
+        "name": "<AlertRuleName>",
+        "location": "global",
+        "properties": {
+          "description": "Alert rule for high CPU usage",
+          "severity": 3,
+          "condition": {
+            "allOf": [
+              {
+                "metricName": "CpuPercentage",
+                "operator": "GreaterThan",
+                "threshold": 80
+              }
+            ]
+          },
+          "actions": [],
+          "enabled": true
+        }
+      }
+    ]
+  }
+  

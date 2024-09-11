@@ -1,0 +1,19 @@
+{
+    "loadBalancerName": "<LoadBalancerName>",
+    "frontendIPConfiguration": {
+      "publicIPAddressName": "<PublicIPAddressName>"
+    },
+    "backendAddressPools": [
+      {
+        "name": "BackendPool"
+      }
+    ],
+    "loadBalancingRules": [
+      {
+        "name": "HttpRule",
+        "frontendPort": 80,
+        "backendPort": 80
+      }
+    ]
+  }
+  

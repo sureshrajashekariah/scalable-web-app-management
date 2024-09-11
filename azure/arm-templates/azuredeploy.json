@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+      {
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2021-02-01",
+        "name": "[parameters('webAppName')]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+        }
+      },
+      {
+        "type": "Microsoft.Web/serverfarms",
+        "apiVersion": "2021-02-01",
+        "name": "[parameters('hostingPlanName')]",
+        "location": "[parameters('location')]",
+        "sku": {
+          "Tier": "Standard",
+          "Name": "S1",
+          "Capacity": 1
+        },
+        "properties": {
+          "name": "[parameters('hostingPlanName')]"
+        }
+      }
+    ],
+    "parameters": {
+      "webAppName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the web app"
+        }
+      },
+      "hostingPlanName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the App Service Plan"
+        }
+      },
+      "location": {
+        "type": "string",
+        "metadata": {
+          "description": "Location for all resources"
+        }
+      }
+    }
+  }
+  

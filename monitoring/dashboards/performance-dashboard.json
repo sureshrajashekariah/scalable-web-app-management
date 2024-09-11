@@ -1,0 +1,30 @@
+{
+    "type": "Microsoft.Portal/dashboards",
+    "apiVersion": "2021-09-01",
+    "properties": {
+      "lenses": {
+        "analytics": {
+          "parts": {
+            "metricChart": {
+              "position": {
+                "x": 0,
+                "y": 0,
+                "colSpan": 24,
+                "rowSpan": 12
+              },
+              "metadata": {
+                "type": "metricChart",
+                "name": "Performance Metrics",
+                "query": {
+                  "type": "metric",
+                  "resourceId": "/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroupName>/providers/microsoft.web/sites/<YourWebAppName>",
+                  "metricNames": ["CpuPercentage", "MemoryUsage"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

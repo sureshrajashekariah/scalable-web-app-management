@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schema.management.azure.com/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+      {
+        "type": "Microsoft.Network/loadBalancers",
+        "apiVersion": "2021-05-01",
+        "name": "[parameters('loadBalancerName')]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "sku": {
+            "name": "Basic"
+          },
+          "frontendIPConfigurations": [
+            {
+              "name": "LoadBalancerFrontEnd",
+              "properties": {
+                "PublicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
+                }
+              }
+            }
+          ],
+          "backendAddressPools": [
+            {
+              "name": "BackendPool"
+            }
+          ],
+          "loadBalancingRules": [
+            {
+              "name": "HttpRule",
+              "properties": {
+                "frontendIPConfiguration": {
+                  "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', parameters('loadBalancerName'), 'LoadBalancerFrontEnd')]"
+                },
+                "backendAddressPool": {
+                  "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancerName'), 'BackendPool')]"
+                },
+                "protocol": "Tcp",
+                "frontendPort": 80,
+                "backendPort": 80,
+                "enableFloatingIP": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parameters": {
+      "loadBalancerName": {
+        "type": "string"
+      },
+      "location": {
+        "type": "string"
+      },
+      "publicIPAddressName": {
+        "type": "string"
+      }
+    }
+  }
+  
